@@ -9,6 +9,19 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit Test Using JUnit
+ * Here's how you can write a unit test to test the thread safety of the SafeCounter class using JUnit and CountDownLatch.
+ * 
+ * Explanation
+ * 
+ * NUM_THREADS: Defines the number of threads that will be used to increment the counter.
+ * CountDownLatch: Used to synchronize the start and end of thread execution. startLatch ensures all threads start at the same time, and endLatch waits for all threads to finish.
+ * ExecutorService: Manages the pool of threads.
+ * Assertions: Validates the final count to ensure no increments were lost due to race conditions.
+ * 
+ */
+
 public class SafeCounterTest {
 
     @Test
