@@ -15,7 +15,7 @@ public class ImplementRunnable implements Runnable {
             counter++;
             System.out.println(Thread.currentThread().getName() + " --> " + counter);            
         } catch (Exception e) {
-            // TODO: handle exception
+            // handle exception
         } finally {
             lock.unlock();
         }
