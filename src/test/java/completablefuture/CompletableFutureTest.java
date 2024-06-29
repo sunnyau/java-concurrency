@@ -1,6 +1,6 @@
 package completablefuture;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -10,8 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test get 
@@ -21,11 +20,6 @@ import org.junit.Test;
  *
  */
 public class CompletableFutureTest {
-
-    @Before	
-	public void setUp() throws Exception {
-	}
-
 
     /**
      * Single thread example.
@@ -45,7 +39,7 @@ public class CompletableFutureTest {
 		totalPrice += onlineShop.getPrice("pen");
 		
 		long msTaken = startDt.until( LocalDateTime.now(), ChronoUnit.MILLIS);
-		System.out.println("Time taken [" + msTaken + "] ms. total price = [£" + String.format( "%.2f", totalPrice ) + "]" );
+		System.out.println("Time taken [" + msTaken + "] ms. total price = [ï¿½" + String.format( "%.2f", totalPrice ) + "]" );
 		assertTrue(true);
 	}
 	
@@ -82,7 +76,7 @@ public class CompletableFutureTest {
 		totalPrice += future4.get();		
 		
 		long msTaken = startDt.until( LocalDateTime.now(), ChronoUnit.MILLIS);
-		System.out.println("Time taken [" + msTaken + "] ms. total price = [£" + String.format( "%.2f", totalPrice ) + "]" );
+		System.out.println("Time taken [" + msTaken + "] ms. total price = [ï¿½" + String.format( "%.2f", totalPrice ) + "]" );
 		assertTrue(true);
 	}
 	
@@ -111,7 +105,7 @@ public class CompletableFutureTest {
 		totalPrice += future4.get();		
 		
 		long msTaken = startDt.until( LocalDateTime.now(), ChronoUnit.MILLIS);
-		System.out.println("Time taken [" + msTaken + "] ms. total price = [£" + String.format( "%.2f", totalPrice ) + "]" );
+		System.out.println("Time taken [" + msTaken + "] ms. total price = [ï¿½" + String.format( "%.2f", totalPrice ) + "]" );
 		assertTrue(true);
 	}
 	
