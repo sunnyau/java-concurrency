@@ -19,10 +19,11 @@ public class Shop {
 		try {
 			Thread.sleep(1000L);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
-		return random.nextDouble() * product.charAt(0) + product.charAt(1);
+		//return random.nextDouble() * product.charAt(0) + product.charAt(1);
+		return product.charAt(0) + product.charAt(1);
 	}
 
 

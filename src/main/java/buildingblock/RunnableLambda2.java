@@ -27,7 +27,7 @@ public class RunnableLambda2 {
             counter.incrementAndGet();
             System.out.println(Thread.currentThread().getName() + " --> " + counter.get() );        
         } catch (Exception e) {
-            // TODO: handle exception
+            // handle exception
         } finally {
             lock.unlock();
         }
