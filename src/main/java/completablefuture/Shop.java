@@ -2,7 +2,6 @@ package completablefuture;
 
 import java.util.Random;
 
-
 /**
  * 
  * @author User
@@ -11,20 +10,19 @@ import java.util.Random;
 public class Shop {
 
 	private Random random = new Random();
-	
+
 	/**
 	 * Wait for 1 second.
 	 */
-	public double getPrice(String product)  {
+	public double getPrice(String product) {
 		try {
 			Thread.sleep(1000L);
 		} catch (InterruptedException e) {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
-		//return random.nextDouble() * product.charAt(0) + product.charAt(1);
+		// return random.nextDouble() * product.charAt(0) + product.charAt(1);
 		return product.charAt(0) + product.charAt(1);
 	}
-
 
 }
