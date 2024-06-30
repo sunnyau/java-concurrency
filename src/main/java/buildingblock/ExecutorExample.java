@@ -1,18 +1,20 @@
 package buildingblock;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Update with Java 8 Lambda 
+ */
 class ExecutorExample {
   public static void main(String args[]) {
     
     ExecutorService es = Executors.newFixedThreadPool(2);
 
-    es.execute(new ExecutorExampleMyThread("A"));
-    es.execute(new ExecutorExampleMyThread("B"));
-    es.execute(new ExecutorExampleMyThread("C"));
-    es.execute(new ExecutorExampleMyThread("D"));
+    es.execute( () -> System.out.println("A"));
+    es.execute( () -> System.out.println("B"));
+    es.execute( () -> System.out.println("C"));
+    es.execute( () -> System.out.println("D"));
 
     
     es.shutdown();
@@ -20,14 +22,14 @@ class ExecutorExample {
   }
 }
 
-class ExecutorExampleMyThread implements Runnable {
-  String name;
+// class ExecutorExampleMyThread implements Runnable {
+//   String name;
 
-  ExecutorExampleMyThread(String n) {
-    name = n;
-  }
+//   ExecutorExampleMyThread(String n) {
+//     name = n;
+//   }
 
-  public void run() {
-  	  System.out.println(name);
-  }
-}
+//   public void run() {
+//   	  System.out.println(name);
+//   }
+// }
