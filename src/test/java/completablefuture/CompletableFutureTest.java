@@ -40,7 +40,7 @@ public class CompletableFutureTest {
 		totalPrice += onlineShop.getPrice("pen");
 		
 		long msTaken = startDt.until( LocalDateTime.now(), ChronoUnit.MILLIS);
-		System.out.println("testGetPriceFromShopOneByOne. Time taken [" + msTaken + "] ms." );
+		System.out.println("testGetPriceFromShopOneByOne.          Time taken [" + msTaken + "] ms." );
         assertEquals(833.0, totalPrice);
 	}
 	
@@ -73,7 +73,7 @@ public class CompletableFutureTest {
 		double totalPrice = future1.get() + future2.get() + future3.get() + future4.get();		
 		
 		long msTaken = startDt.until( LocalDateTime.now(), ChronoUnit.MILLIS);
-		System.out.println("testGetPriceFromShopsAtTheSameTime. Time taken [" + msTaken + "] ms" );
+		System.out.println("testGetPriceFromShopsAtTheSameTime.    Time taken [" + msTaken + "] ms" );
         assertEquals(833.0, totalPrice);
 	}
 	
