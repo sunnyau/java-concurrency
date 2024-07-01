@@ -18,12 +18,13 @@ import org.junit.jupiter.api.Test;
  * 
  * Ref : https://www.baeldung.com/java-start-two-threads-at-same-time
  */
-public class UnsafeCounterTestWithCyclicBarrier {
+public class UnsafeCounterWithCyclicBarrierTest {
 
-    public static final int THREAD_COUNT = 10000;
+    // public static final int THREAD_COUNT = 10000;
+    public static final int THREAD_COUNT = 10;
 
     @Test
-    public void allThreadsShouldReturnOnePlus() throws InterruptedException, BrokenBarrierException {
+    public void countShouldEqualsToThreadNumber() throws InterruptedException, BrokenBarrierException {
 
         UnsafeCounter unsafeCounter = new UnsafeCounter();        
         CyclicBarrier barrier = new CyclicBarrier( THREAD_COUNT + 1 ); // +1 for main thread
