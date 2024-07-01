@@ -45,15 +45,12 @@ public class UnsafeCounterWithCyclicBarrierTest {
             thread.start();
         }
 
-        // sleep for 2 seconds
-        TimeUnit.SECONDS.sleep(2);
-
         System.out.println("barrier.getNumberWaiting() BEFORE " + barrier.getNumberWaiting());
         // open the last barrier
         barrier.await();
         System.out.println("barrier.getNumberWaiting() AFTER  " + barrier.getNumberWaiting());
 
-        // sleep for 2 seconds to let all threads to complete
+        // sleep for 2 seconds to let all threads to complete. ( Not a good method )
         TimeUnit.SECONDS.sleep(2);
 
         assertEquals(THREAD_COUNT, unsafeCounter.getCount());

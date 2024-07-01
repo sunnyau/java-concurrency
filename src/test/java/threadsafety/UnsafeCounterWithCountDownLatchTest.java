@@ -2,8 +2,6 @@ package threadsafety;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 
@@ -18,7 +16,14 @@ import org.junit.jupiter.api.Test;
  * 
  * The result is that SOMETIMES this test fails.
  * 
- * Ref : https://www.baeldung.com/java-start-two-threads-at-same-time
+ * Ref :
+ * https://www.baeldung.com/java-start-two-threads-at-same-time
+ * https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CountDownLatch.html
+ * 
+ * Note : As we want to start all threads at the same time and want to wait all
+ * threads to finish before counting the count, we use TWO countDownLatch(s) :
+ * startLatch and endLatch
+ * 
  */
 public class UnsafeCounterWithCountDownLatchTest {
 
@@ -28,23 +33,33 @@ public class UnsafeCounterWithCountDownLatchTest {
     @Test
     public void countShouldEqualsToThreadNumber() throws InterruptedException, BrokenBarrierException {
 
-        List<Thread> list = new LinkedList<>();
+        // List<Thread> list = new LinkedList<>();
         UnsafeCounter unsafeCounter = new UnsafeCounter();
-        CountDownLatch latch = new CountDownLatch(THREAD_COUNT);
+
+        // we use two countdownLatch(s).
+        CountDownLatch startLatch = new CountDownLatch(1);
+        CountDownLatch endLatch = new CountDownLatch(THREAD_COUNT);
 
         for (int i = 0; i < THREAD_COUNT; i++) {
             Runnable runnable = () -> {
-                unsafeCounter.increment();
-                latch.countDown();
+                try {
+                    // we wait until startLatch count is 0.
+                    startLatch.await();
+                    unsafeCounter.increment();                    
+                    endLatch.countDown();
+                } catch (InterruptedException e) {
+                    // Auto-generated catch block
+                    e.printStackTrace();
+                }
             };
-            list.add(new Thread(runnable));
+            new Thread(runnable).start();
         }
 
-        // start all threads at the same time
-        list.forEach(t -> t.start());
+        // let all threads start at the same time
+        startLatch.countDown();
 
         // wait all threads to complete
-        latch.await();
+        endLatch.await();
 
         assertEquals(THREAD_COUNT, unsafeCounter.getCount());
     }
