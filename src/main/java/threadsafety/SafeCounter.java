@@ -1,4 +1,4 @@
-package threadsafe;
+package threadsafety;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

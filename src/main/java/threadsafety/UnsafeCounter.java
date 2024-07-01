@@ -1,4 +1,4 @@
-package threadsafe;
+package threadsafety;
 
 /**
  * Write a unit test to show this class is not thread-safe
