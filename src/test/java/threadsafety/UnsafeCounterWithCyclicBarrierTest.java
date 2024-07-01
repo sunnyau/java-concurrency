@@ -1,4 +1,4 @@
-package threadsafe;
+package threadsafety;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,8 +9,9 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
- * This test starts a number of threads to increment UnsafeCounter. 
- * After incrementing by all threads, the counter should be the same as THREAD_COUNT.
+ * This test starts a number of threads to increment UnsafeCounter.
+ * After incrementing by all threads, the counter should be the same as
+ * THREAD_COUNT.
  * 
  * However as UnsafeCounter is not thread safe, it causes race condition.
  * 
@@ -26,24 +27,22 @@ public class UnsafeCounterWithCyclicBarrierTest {
     @Test
     public void countShouldEqualsToThreadNumber() throws InterruptedException, BrokenBarrierException {
 
-        UnsafeCounter unsafeCounter = new UnsafeCounter();        
-        CyclicBarrier barrier = new CyclicBarrier( THREAD_COUNT + 1 ); // +1 for main thread
-
+        UnsafeCounter unsafeCounter = new UnsafeCounter();
+        CyclicBarrier barrier = new CyclicBarrier(THREAD_COUNT + 1); // +1 for main thread
 
         for (int i = 0; i < THREAD_COUNT; i++) {
-            Runnable runnable = () -> {        
-                try 
-                {
-                    //The thread keeps waiting till it is informed
-                    barrier.await();        
+            Runnable runnable = () -> {
+                try {
+                    // The thread keeps waiting till it is informed
+                    barrier.await();
                     unsafeCounter.increment();
                 } catch (InterruptedException | BrokenBarrierException e) {
                     e.printStackTrace();
                 }
             };
-            
-            Thread thread = new Thread( runnable );
-            thread.start();            
+
+            Thread thread = new Thread(runnable);
+            thread.start();
         }
 
         // sleep for 2 seconds
@@ -57,6 +56,6 @@ public class UnsafeCounterWithCyclicBarrierTest {
         // sleep for 2 seconds to let all threads to complete
         TimeUnit.SECONDS.sleep(2);
 
-        assertEquals( THREAD_COUNT, unsafeCounter.getCount() );
+        assertEquals(THREAD_COUNT, unsafeCounter.getCount());
     }
 }

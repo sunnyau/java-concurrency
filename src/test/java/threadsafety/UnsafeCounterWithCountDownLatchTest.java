@@ -1,4 +1,4 @@
-package threadsafe;
+package threadsafety;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,14 +6,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
 
 /**
- * This test starts a number of threads to increment UnsafeCounter. 
- * After incrementing by all threads, the counter should be the same as THREAD_COUNT.
+ * This test starts a number of threads to increment UnsafeCounter.
+ * After incrementing by all threads, the counter should be the same as
+ * THREAD_COUNT.
  * 
  * However as UnsafeCounter is not thread safe, it causes race condition.
  * 
@@ -30,26 +29,23 @@ public class UnsafeCounterWithCountDownLatchTest {
     public void countShouldEqualsToThreadNumber() throws InterruptedException, BrokenBarrierException {
 
         List<Thread> list = new LinkedList<>();
-        UnsafeCounter unsafeCounter = new UnsafeCounter();        
+        UnsafeCounter unsafeCounter = new UnsafeCounter();
         CountDownLatch latch = new CountDownLatch(THREAD_COUNT);
 
         for (int i = 0; i < THREAD_COUNT; i++) {
-            Runnable runnable = () -> {        
+            Runnable runnable = () -> {
                 unsafeCounter.increment();
                 latch.countDown();
-            };            
-            list.add(new Thread( runnable ));         
+            };
+            list.add(new Thread(runnable));
         }
 
         // start all threads at the same time
-        list.forEach( t -> t.start() );
+        list.forEach(t -> t.start());
 
         // wait all threads to complete
         latch.await();
 
-        // sleep for 2 seconds to let all threads to complete
-        TimeUnit.SECONDS.sleep(2);
-
-        assertEquals( THREAD_COUNT, unsafeCounter.getCount() );
+        assertEquals(THREAD_COUNT, unsafeCounter.getCount());
     }
 }

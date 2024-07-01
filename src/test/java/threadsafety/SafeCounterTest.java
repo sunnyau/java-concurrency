@@ -1,4 +1,4 @@
-package threadsafe;
+package threadsafety;
 
 import org.junit.jupiter.api.Test;
 
