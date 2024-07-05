@@ -9,3 +9,8 @@ java concurrency example
 3. Introduce Synchronization Points: Use synchronization points like latches to ensure threads run concurrently.
 4. Monitor for Race Conditions: Check for race conditions by validating the final state of shared resources.
 5. Run Tests Repeatedly: Execute the test multiple times to increase the chance of catching intermittent issues.
+
+
+Reference
+
+> https://www.baeldung.com/java-testing-multithreaded
