@@ -17,6 +17,11 @@ public class SafeCounter {
     }
 
     public int getCount() {
-        return count;
+        lock.lock();
+        try {
+            return count;
+        } finally {
+            lock.unlock();
+        }
     }
 }
