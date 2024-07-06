@@ -1,4 +1,9 @@
 # java-concurrency
+
+https://www.baeldung.com/java-util-concurrent
+
+https://jenkov.com/tutorials/java-util-concurrent/index.html
+
 java concurrency example
 
 
