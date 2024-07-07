@@ -1,10 +1,6 @@
 # java-concurrency
 
-https://www.baeldung.com/java-util-concurrent
-
-https://jenkov.com/tutorials/java-util-concurrent/index.html
-
-java concurrency example
+java concurrency example and the special completablefuture
 
 
 # Steps to Write a Unit Test for Thread Safety
@@ -19,3 +15,10 @@ java concurrency example
 Reference
 
 > https://www.baeldung.com/java-testing-multithreaded
+
+> https://www.baeldung.com/java-util-concurrent
+
+>https://jenkov.com/tutorials/java-util-concurrent/index.html
+
+>https://www.baeldung.com/java-completablefuture
+
