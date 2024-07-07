@@ -1,7 +1,6 @@
 package completablefuture;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -14,10 +13,8 @@ import java.util.concurrent.Future;
 import org.junit.jupiter.api.Test;
 
 /**
- * This test get
- * 
- * @author Sunny
- * 
+ * Compare the time required for getting Price using different sync and asyn
+ * methods.
  *
  */
 public class CompletableFutureTest {

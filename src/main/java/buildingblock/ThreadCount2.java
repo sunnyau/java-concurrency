@@ -20,7 +20,6 @@ public class ThreadCount2 {
 
 	public void increment() throws InterruptedException {
 		synchronized (this) {
-			Thread.sleep(1);
 			count++;
 		}
 	}
