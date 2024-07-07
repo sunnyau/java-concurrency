@@ -40,7 +40,7 @@ public class CompletableFutureTest {
 		totalPrice += onlineShop.getPrice("pen");
 
 		long msTaken = startDt.until(LocalDateTime.now(), ChronoUnit.MILLIS);
-		System.out.println("testGetPriceFromShopOneByOne.          Time taken [" + msTaken + "] ms.");
+		System.out.println("1. testGetPriceFromShops OneByOne.               Time taken [" + msTaken + "] ms.");
 		assertEquals(833.0, totalPrice);
 	}
 
@@ -56,7 +56,7 @@ public class CompletableFutureTest {
 	 * Future interface holds a value, which you can get in the future.
 	 */
 	@Test
-	public void getPriceFromShopsAtTheSameTime() throws InterruptedException, ExecutionException {
+	public void getPriceFromShopsThreadPool() throws InterruptedException, ExecutionException {
 
 		LocalDateTime startDt = LocalDateTime.now();
 		Shop onlineShop = new Shop();
@@ -75,7 +75,7 @@ public class CompletableFutureTest {
 		double totalPrice = future1.get() + future2.get() + future3.get() + future4.get();
 
 		long msTaken = startDt.until(LocalDateTime.now(), ChronoUnit.MILLIS);
-		System.out.println("testGetPriceFromShopsAtTheSameTime.    Time taken [" + msTaken + "] ms");
+		System.out.println("2. testGetPriceFromShops ThreadPool.             Time taken [" + msTaken + "] ms");
 		assertEquals(833.0, totalPrice);
 	}
 
@@ -84,7 +84,6 @@ public class CompletableFutureTest {
 	 * 
 	 * Instead of creating an ExecutorService and passing in Callable, you can just
 	 * use CompletableFuture.supplyAsync() instead.
-	 * Note : You need to change the jre to 1.8
 	 */
 	@Test
 	public void getPriceFromShopsUsingSupplyAsync() throws InterruptedException, ExecutionException {
@@ -100,8 +99,33 @@ public class CompletableFutureTest {
 		double totalPrice = future1.get() + future2.get() + future3.get() + future4.get();
 
 		long msTaken = startDt.until(LocalDateTime.now(), ChronoUnit.MILLIS);
-		System.out.println("testGetPriceFromShopsUsingSupplyAsync. Time taken [" + msTaken + "] ms");
+		System.out.println("3. testGetPriceFromShops SupplyAsync.            Time taken [" + msTaken + "] ms");
 		assertEquals(833.0, totalPrice);
 	}
 
+	/**
+	 * CompletableFuture
+	 * 
+	 * use CompletableFuture.supplyAsync() with ExecutorService
+	 */
+	@Test
+	public void getPriceFromShopsUsingSupplyAsyncAndThreadPool() throws InterruptedException, ExecutionException {
+
+		LocalDateTime startDt = LocalDateTime.now();
+		Shop onlineShop = new Shop();
+
+		// thread pool with 4 threads.
+		ExecutorService executorService = Executors.newFixedThreadPool(4);
+
+		Future<Double> future1 = CompletableFuture.supplyAsync(() -> onlineShop.getPrice("book"), executorService);
+		Future<Double> future2 = CompletableFuture.supplyAsync(() -> onlineShop.getPrice("phone"), executorService);
+		Future<Double> future3 = CompletableFuture.supplyAsync(() -> onlineShop.getPrice("battery"), executorService);
+		Future<Double> future4 = CompletableFuture.supplyAsync(() -> onlineShop.getPrice("pen"), executorService);
+
+		double totalPrice = future1.get() + future2.get() + future3.get() + future4.get();
+
+		long msTaken = startDt.until(LocalDateTime.now(), ChronoUnit.MILLIS);
+		System.out.println("4. testGetPriceFromShops SupplyAsync ThreadPool. Time taken [" + msTaken + "] ms");
+		assertEquals(833.0, totalPrice);
+	}
 }

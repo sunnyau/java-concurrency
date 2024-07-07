@@ -1,6 +1,6 @@
 package completablefuture;
 
-import java.util.Random;
+// import java.util.Random;
 
 /**
  * 
@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class Shop {
 
-	private Random random = new Random();
+	// private Random random = new Random();
 
 	/**
 	 * Wait for 1 second.
