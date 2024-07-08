@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
  */
 public class CyclicBarrierTest {
 
-    // public static final int THREAD_COUNT = 10000;
     public static final int THREAD_COUNT = 10;
 
     @Test

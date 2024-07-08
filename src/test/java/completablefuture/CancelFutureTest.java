@@ -31,8 +31,6 @@ public class CancelFutureTest {
             }
         });
 
-        // Thread.sleep(10); // give it some time to start (ugly, but works)
-
         // the future is still running.
         assertFalse(future.isCancelled());
         assertFalse(future.isDone());
@@ -43,8 +41,6 @@ public class CancelFutureTest {
         // the future is cancelled.
         assertTrue(future.isCancelled());
         assertTrue(future.isDone());
-
-        // Thread.sleep(100); // give it some time to finish
     }
 
 }
