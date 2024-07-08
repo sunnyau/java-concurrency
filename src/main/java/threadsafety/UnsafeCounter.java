@@ -1,10 +1,11 @@
 package threadsafety;
 
-import java.util.concurrent.locks.ReentrantLock;
+import annotation.NotThreadSafe;
 
 /**
  * Write a unit test to show this class is NOT thread-safe
  */
+@NotThreadSafe
 public class UnsafeCounter {
 
     private int count = 0;

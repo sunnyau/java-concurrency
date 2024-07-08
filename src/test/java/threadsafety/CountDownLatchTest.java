@@ -21,7 +21,6 @@ public class CountDownLatchTest {
     @Test
     public void countShouldEqualsToThreadNumber() throws InterruptedException, BrokenBarrierException {
 
-        // List<Thread> list = new LinkedList<>();
         SafeCounter safeCounter = new SafeCounter();
 
         // we use two countdownLatch(s).

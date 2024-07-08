@@ -3,6 +3,9 @@ package threadsafety;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import annotation.ThreadSafe;
+
+@ThreadSafe
 public class SafeCounter {
     private int count = 0;
     private final Lock lock = new ReentrantLock();
