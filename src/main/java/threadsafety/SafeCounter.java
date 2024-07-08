@@ -16,6 +16,17 @@ public class SafeCounter {
         }
     }
 
+    public void incrementMillionTimes() {
+        lock.lock();
+        try {
+            for (int i = 0; i < 1_000_000; i++) {
+                count++;
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
+
     public int getCount() {
         lock.lock();
         try {

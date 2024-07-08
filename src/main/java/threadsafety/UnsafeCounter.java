@@ -13,30 +13,10 @@ public class UnsafeCounter {
         return count;
     }
 
-    public void increment() {
-        count++;
+    public void incrementMillionTimes() {
+        for ( int i = 0 ; i < 1_000_000 ; i++ ) {
+            count++;
+        }        
     }
 
-    // private ReentrantLock lock = new ReentrantLock();
-
-    // public int getCount() {
-    // lock.lock();
-    // try {
-    // return count;
-    // } catch (Exception e) {
-    // return Integer.MIN_VALUE;
-    // } finally {
-    // lock.unlock();
-    // }
-    // }
-
-    // public void increment() {
-    // lock.lock();
-    // try {
-    // this.count++;
-    // } catch (Exception e) {
-    // } finally {
-    // lock.unlock();
-    // }
-    // }
 }

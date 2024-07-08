@@ -4,37 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
 
 /**
- * This test starts a number of threads to increment UnsafeCounter.
- * After incrementing by all threads, the counter should be the same as
- * THREAD_COUNT.
- * 
- * However as UnsafeCounter is not thread safe, it causes race condition.
- * 
- * The result is that SOMETIMES this test fails.
- * 
- * Ref :
- * https://www.baeldung.com/java-start-two-threads-at-same-time
- * https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CountDownLatch.html
- * 
- * Note : As we want to start all threads at the same time and want to wait all
+ * As we want to start all threads at the same time and want to wait all
  * threads to finish before counting the count, we use TWO countDownLatch(s) :
  * startLatch and endLatch
  * 
  */
-public class UnsafeCounterWithCountDownLatchTest {
+public class CountDownLatchTest {
 
-    // public static final int THREAD_COUNT = 10000;
     public static final int THREAD_COUNT = 10;
 
     @Test
     public void countShouldEqualsToThreadNumber() throws InterruptedException, BrokenBarrierException {
 
         // List<Thread> list = new LinkedList<>();
-        UnsafeCounter unsafeCounter = new UnsafeCounter();
+        SafeCounter safeCounter = new SafeCounter();
 
         // we use two countdownLatch(s).
         CountDownLatch startLatch = new CountDownLatch(1);
@@ -44,9 +32,15 @@ public class UnsafeCounterWithCountDownLatchTest {
             Runnable runnable = () -> {
                 try {
                     // we wait until startLatch count is 0.
+                    System.out.println("Thread is waiting to start");
                     startLatch.await();
-                    unsafeCounter.increment();                    
+
+                    safeCounter.increment(); 
+                    // let allow the thread to take some time to do some works. 
+                    TimeUnit.SECONDS.sleep(1);
+
                     endLatch.countDown();
+                    System.out.println("Thread has ended");                      
                 } catch (InterruptedException e) {
                     // Auto-generated catch block
                     e.printStackTrace();
@@ -61,6 +55,6 @@ public class UnsafeCounterWithCountDownLatchTest {
         // wait all threads to complete
         endLatch.await();
 
-        assertEquals(THREAD_COUNT, unsafeCounter.getCount());
+        assertEquals(THREAD_COUNT, safeCounter.getCount());
     }
 }
