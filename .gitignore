@@ -1,2 +1,5 @@
-target/
-.vscode/
+.vscode
+build
+.gradle
+gradle
+target
