@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.java8'
+version = '1.0-SNAPSHOT'
+description = 'java_concurrency'
+sourceCompatibility = 21
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation libs.org.junit.jupiter.junit.jupiter
+}
+
+test {
+	useJUnitPlatform()
+}
