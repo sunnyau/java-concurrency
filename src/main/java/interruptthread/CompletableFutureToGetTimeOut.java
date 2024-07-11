@@ -13,7 +13,7 @@ public class CompletableFutureToGetTimeOut {
     public static void main(String[] args) {
 
         Runnable runnable = () -> {
-            while (!Thread.currentThread().isInterrupted()) {
+            while (true) {
                 System.out.println("thread is running");
                 try {
                     Thread.sleep(1000);
@@ -30,6 +30,7 @@ public class CompletableFutureToGetTimeOut {
             completableFuture.get(5, TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             // No need to call completableFuture.cancel(true);
+            System.err.println(e.toString());
         }
 
         try {
