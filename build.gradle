@@ -2,9 +2,9 @@ plugins {
     id 'java'
 }
 
-group = 'com.java8'
+group = 'com'
 version = '1.0-SNAPSHOT'
-description = 'java_concurrency'
+description = 'java-concurrency'
 sourceCompatibility = 21
 
 
