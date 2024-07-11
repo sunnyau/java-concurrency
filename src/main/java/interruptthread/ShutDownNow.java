@@ -8,9 +8,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Use a shutDownNow() to interrupt a thread.
  * 
- * This thread runs for 5 seconds and then gets interrupted by changing the flag.
- * 
- * TO DO 
+ * This thread runs for 5 seconds and then gets interrupted by changing the
+ * flag.
  */
 public class ShutDownNow {
 
@@ -18,27 +17,26 @@ public class ShutDownNow {
 
         ExecutorService es = Executors.newFixedThreadPool(2);
 
-        // note to myself : TimeUnit.SECONDS.sleep(1) does not need to use try-catch in Callable but needs try-catch in Runnable.
+        // note to myself : TimeUnit.SECONDS.sleep(1) does not need to use try-catch in
+        // Callable but needs try-catch in Runnable.
         Callable<String> callable = () -> {
-            while(!Thread.currentThread().isInterrupted()) {
+            while (!Thread.currentThread().isInterrupted()) {
                 System.out.println("thread is running");
-                Thread.sleep(1000);          
+                Thread.sleep(1000);
             }
             return "End of Thread";
         };
 
         es.submit(callable);
 
-        // accept no more task
-        es.shutdown();
-
         try {
-            TimeUnit.SECONDS.sleep(5000);
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             // no action is required.
-        }    
+        }
 
-        System.out.println("Action : ExecutorService.shutdownNow()");        
+        // accept no more task and stop any current tasks
+        System.out.println("Action : ExecutorService.shutdownNow()");
         es.shutdownNow();
 
         System.out.println("End of main");

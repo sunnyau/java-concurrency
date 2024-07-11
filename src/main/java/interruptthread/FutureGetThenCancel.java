@@ -9,9 +9,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * TODO 
+ * Use a Future cancel to interrupt a thread.
+ * 
+ * The future get() waits for 5 seconds and then call cancel() to interrupt a thread.
  */
-public class FutureGet {
+public class FutureGetThenCancel {
 
         public static void main(String[] args) {
 
@@ -30,29 +32,13 @@ public class FutureGet {
         // accept no more task
         es.shutdown(); 
 
-        // try {
-        //     TimeUnit.SECONDS.sleep(5);
-        // } catch (InterruptedException e) {
-        //     // no action is required.
-        // }
-
-        System.out.println("Action : future.get( 5, TimeUnit.SECONDS)");
-
         try {
+            System.out.println("Action : future.get( 5, TimeUnit.SECONDS)");            
             future.get( 5, TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("Action : future.cancel(true)");            
+            future.cancel(true);
         }
-
-        // As future is cancelled, calling future.get() will throw CancellationException
-
-        // try {
-        //     System.out.println(future.get());
-        // } catch (InterruptedException | ExecutionException | CancellationException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        // }
 
         System.out.println("End of main");
     }

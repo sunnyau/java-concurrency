@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * 
  * This thread runs for 5 seconds and then gets interrupted by changing the flag.
  */
-public class UseFlag {
+public class UseBooleanVolatileFlag {
 
     public static void main(String[] args) throws InterruptedException {
 
