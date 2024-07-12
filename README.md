@@ -11,6 +11,14 @@ java concurrency example and the special completablefuture
 4. Monitor for Race Conditions: Check for race conditions by validating the final state of shared resources.
 5. Run Tests Repeatedly: Execute the test multiple times to increase the chance of catching intermittent issues.
 
+# Software required
+
+> openjdk version "21.0.3"
+
+> Apache Maven 3.8.7
+
+> Gradle 8.5
+
 # How to build by maven
 
 mvn compile test
