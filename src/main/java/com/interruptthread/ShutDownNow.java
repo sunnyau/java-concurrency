@@ -20,11 +20,12 @@ public class ShutDownNow {
         // note to myself : TimeUnit.SECONDS.sleep(1) does not need to use try-catch in
         // Callable but needs try-catch in Runnable.
         Callable<String> callable = () -> {
-            while (!Thread.currentThread().isInterrupted()) {
+            // while (!Thread.currentThread().isInterrupted()) {
+            while (true) {
                 System.out.println("thread is running");
                 Thread.sleep(1000);
             }
-            return "End of Thread";
+            // return "End of Thread";
         };
 
         es.submit(callable);

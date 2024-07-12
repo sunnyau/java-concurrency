@@ -18,11 +18,12 @@ public class FutureCancel {
         ExecutorService es = Executors.newFixedThreadPool(2);
 
         Callable<String> callable = () -> {
-            while(!Thread.currentThread().isInterrupted()) {
+            // while(!Thread.currentThread().isInterrupted()) {
+            while(true) {            
                 System.out.println("thread is running");
                 Thread.sleep(1000);
             }
-            return "End of Thread";
+            // return "End of Thread";
         };
 
         Future<String> future = es.submit(callable);
