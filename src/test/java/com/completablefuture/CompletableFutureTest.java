@@ -2,6 +2,8 @@ package com.completablefuture;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.CompletableFuture;
@@ -29,7 +31,7 @@ public class CompletableFutureTest {
 	@Test
 	public void getPriceFromShopOneByOne() throws InterruptedException {
 
-		LocalDateTime startDt = LocalDateTime.now();
+		Instant startNow = Instant.now();
 		Shop onlineShop = new Shop();
 
 		double totalPrice = 0;
@@ -38,7 +40,9 @@ public class CompletableFutureTest {
 		totalPrice += onlineShop.getPrice("battery");
 		totalPrice += onlineShop.getPrice("pen");
 
-		long msTaken = startDt.until(LocalDateTime.now(), ChronoUnit.MILLIS);
+		Instant endNow = Instant.now();
+		long msTaken = Duration.between(startNow, endNow).toMillis();
+
 		System.out.println("1. testGetPriceFromShops OneByOne.               Time taken [" + msTaken + "] ms.");
 		assertEquals(833.0, totalPrice);
 	}
@@ -57,7 +61,7 @@ public class CompletableFutureTest {
 	@Test
 	public void getPriceFromShopsThreadPool() throws InterruptedException, ExecutionException {
 
-		LocalDateTime startDt = LocalDateTime.now();
+		Instant startNow = Instant.now();
 		Shop onlineShop = new Shop();
 
 		// thread pool with 4 threads.
@@ -73,7 +77,8 @@ public class CompletableFutureTest {
 
 		double totalPrice = future1.get() + future2.get() + future3.get() + future4.get();
 
-		long msTaken = startDt.until(LocalDateTime.now(), ChronoUnit.MILLIS);
+		Instant endNow = Instant.now();
+		long msTaken = Duration.between(startNow, endNow).toMillis();
 		System.out.println("2. testGetPriceFromShops ThreadPool.             Time taken [" + msTaken + "] ms");
 		assertEquals(833.0, totalPrice);
 	}
@@ -87,7 +92,7 @@ public class CompletableFutureTest {
 	@Test
 	public void getPriceFromShopsUsingSupplyAsync() throws InterruptedException, ExecutionException {
 
-		LocalDateTime startDt = LocalDateTime.now();
+		Instant startNow = Instant.now();
 		Shop onlineShop = new Shop();
 
 		Future<Double> future1 = CompletableFuture.supplyAsync(() -> onlineShop.getPrice("book"));
@@ -97,7 +102,9 @@ public class CompletableFutureTest {
 
 		double totalPrice = future1.get() + future2.get() + future3.get() + future4.get();
 
-		long msTaken = startDt.until(LocalDateTime.now(), ChronoUnit.MILLIS);
+		Instant endNow = Instant.now();
+		long msTaken = Duration.between(startNow, endNow).toMillis();
+
 		System.out.println("3. testGetPriceFromShops SupplyAsync.            Time taken [" + msTaken + "] ms");
 		assertEquals(833.0, totalPrice);
 	}
@@ -110,7 +117,7 @@ public class CompletableFutureTest {
 	@Test
 	public void getPriceFromShopsUsingSupplyAsyncAndThreadPool() throws InterruptedException, ExecutionException {
 
-		LocalDateTime startDt = LocalDateTime.now();
+		Instant startNow = Instant.now();
 		Shop onlineShop = new Shop();
 
 		// thread pool with 4 threads.
@@ -123,7 +130,9 @@ public class CompletableFutureTest {
 
 		double totalPrice = future1.get() + future2.get() + future3.get() + future4.get();
 
-		long msTaken = startDt.until(LocalDateTime.now(), ChronoUnit.MILLIS);
+		Instant endNow = Instant.now();
+		long msTaken = Duration.between(startNow, endNow).toMillis();
+
 		System.out.println("4. testGetPriceFromShops SupplyAsync ThreadPool. Time taken [" + msTaken + "] ms");
 		assertEquals(833.0, totalPrice);
 	}
