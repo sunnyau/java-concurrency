@@ -5,18 +5,23 @@ import java.util.concurrent.TimeUnit;
 /**
  * Use a thread.interrupt() to interrupt a thread.
  * 
- * This thread runs for 5 seconds and then gets interrupted by changing the flag.
+ * This thread runs for 5 seconds and then gets interrupted by changing the
+ * flag.
  */
 public class InteruptThread extends Thread {
 
     public void run() {
-        while(!Thread.currentThread().isInterrupted()) {
-            System.out.println("thread is running");
-            // do not catch InterruptedException
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                System.out.println("thread is running");
+                TimeUnit.SECONDS.sleep(1);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("InterruptedException is thrown.");
         }
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
         InteruptThread thread = new InteruptThread();
         thread.start();
