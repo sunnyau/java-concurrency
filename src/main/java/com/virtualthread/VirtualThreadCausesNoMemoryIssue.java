@@ -1,0 +1,32 @@
+package com.virtualthread;
+
+/**
+ * Running virtual thread with blocked task causes memory issue.
+ * 
+ * Note : You will notice the output become slower and slower after a few
+ * hundreds.
+ */
+public class VirtualThreadCausesNoMemoryIssue {
+
+    public static void main(String[] args) {
+
+        Runnable blockedTask = () -> {
+            while (true) {
+                // do nothing but blocked the task
+            }
+        };
+
+        final int numberOfThreads = 100_000;
+
+        for (int i = 0; i < numberOfThreads; i++) {
+            Thread thread = Thread.ofVirtual().unstarted(blockedTask);
+            thread.start();
+            String str = String.format("Java 21 virtual thread number %s is running.", i);
+            System.out.println(str);
+        }
+
+        // we should put all the threads into a list and then use join() to wait for them to finish.
+
+        System.out.println("End of main");
+    }
+}
