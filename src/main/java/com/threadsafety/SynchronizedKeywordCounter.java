@@ -1,41 +1,27 @@
-package com.buildingblock;
+package com.threadsafety;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Use ReentrantLock
+ * Use synchronized keyword in the method
  */
-public class ThreadCount3 {
+public class SynchronizedKeywordCounter {
 
 	private int count;
-	private Lock lock = new ReentrantLock();
 
-	public int getCount() {
-		lock.lock();
-		try {
-			return count;
-		} finally {
-			lock.unlock();
-		}
+	public synchronized int getCount() {
+		return count;
 	}
 
-	public void increment() throws InterruptedException {
-		lock.lock();
-		try {
-			Thread.sleep(1);
-			count++;
-		} finally {
-			lock.unlock();
-		}
+	public synchronized void increment() throws InterruptedException {
+		count++;
 	}
 
 	public static void main(String[] args) {
-		ThreadCount3 threadCount = new ThreadCount3();
+		SynchronizedKeywordCounter threadCount = new SynchronizedKeywordCounter();
 
 		ExecutorService taskExecutor = Executors.newFixedThreadPool(3);
 		for (int i = 0; i < 10000; i++) {

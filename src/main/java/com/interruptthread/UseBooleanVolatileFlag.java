@@ -18,7 +18,7 @@ public class UseBooleanVolatileFlag {
 
         ExecutorService es = Executors.newFixedThreadPool(2);
 
-        Runnable runnable = () -> {
+        Runnable task = () -> {
             running.set(true);
             while (running.get()) {
                 System.out.println("thread is running");
@@ -30,7 +30,7 @@ public class UseBooleanVolatileFlag {
             }
         };
 
-        es.submit(runnable);
+        es.submit(task);
 
         // accept no more task
         es.shutdown();

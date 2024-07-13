@@ -30,7 +30,7 @@ public class CountDownLatchTest {
         CountDownLatch endLatch = new CountDownLatch(THREAD_COUNT);
 
         for (int i = 0; i < THREAD_COUNT; i++) {
-            Runnable runnable = () -> {
+            Runnable task = () -> {
                 try {
                     // we wait until startLatch count is 0.
                     System.out.println("Thread is waiting to start");
@@ -47,7 +47,7 @@ public class CountDownLatchTest {
                     e.printStackTrace();
                 }
             };
-            new Thread(runnable).start();
+            new Thread(task).start();
         }
 
         // let all threads start at the same time

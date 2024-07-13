@@ -15,7 +15,7 @@ public class SemaphoreExample {
         Semaphore semaphore = new Semaphore(2, true);
 
         for ( int i = 0 ; i < 10 ; i++ ) {
-            Runnable runnable = () -> {
+            Runnable task = () -> {
                 String threadName = Thread.currentThread().getName();
                 try {
                     System.out.println( threadName + " is waiting for semaphore to acquire. " + semaphore.availablePermits() + " is available.");
@@ -29,7 +29,7 @@ public class SemaphoreExample {
                     System.out.println( threadName + " semaphore has released. " + semaphore.availablePermits() + " is available.");
                 }
             };
-            new Thread(runnable).start();
+            new Thread(task).start();
         }
     }
 
