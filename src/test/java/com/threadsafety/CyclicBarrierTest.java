@@ -30,7 +30,7 @@ public class CyclicBarrierTest {
         CyclicBarrier barrier = new CyclicBarrier(THREAD_COUNT + 1); // +1 for main thread
 
         for (int i = 0; i < THREAD_COUNT; i++) {
-            Runnable runnable = () -> {
+            Runnable task = () -> {
                 try {
                     String thisThreadName = Thread.currentThread().getName();
 
@@ -50,7 +50,7 @@ public class CyclicBarrierTest {
                 }
             };
 
-            Thread thread = new Thread(runnable);
+            Thread thread = new Thread(task);
             thread.start();
         }
 

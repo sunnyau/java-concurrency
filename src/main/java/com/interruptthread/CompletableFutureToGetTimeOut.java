@@ -12,7 +12,7 @@ public class CompletableFutureToGetTimeOut {
 
     public static void main(String[] args) {
 
-        Runnable runnable = () -> {
+        Runnable task = () -> {
             while (true) {
                 System.out.println("thread is running");
                 try {
@@ -23,7 +23,7 @@ public class CompletableFutureToGetTimeOut {
             }
         };
 
-        CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(runnable);
+        CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(task);
 
         try {
             System.out.println("Action : completableFuture.get( 5, TimeUnit.SECONDS)");
