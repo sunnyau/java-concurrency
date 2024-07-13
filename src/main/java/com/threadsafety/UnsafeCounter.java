@@ -14,10 +14,14 @@ public class UnsafeCounter {
         return count;
     }
 
+    public void increment() {
+        count++;
+    }
+
     public void incrementMillionTimes() {
-        for ( int i = 0 ; i < 1_000_000 ; i++ ) {
+        for (int i = 0; i < 1_000_000; i++) {
             count++;
-        }        
+        }
     }
 
 }
