@@ -1,4 +1,4 @@
-package com.buildingblock;
+package com.threadsafety;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -6,22 +6,26 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Use synchronized keyword in the method
+ * Use synchronized block in the method
  */
-public class ThreadCount1 {
+public class SynchronizedBlockCounter {
 
 	private int count;
 
-	public synchronized int getCount() {
-		return count;
+	public int getCount() {
+		synchronized (this) {
+			return count;
+		}
 	}
 
-	public synchronized void increment() throws InterruptedException {
-		count++;
+	public void increment() throws InterruptedException {
+		synchronized (this) {
+			count++;
+		}
 	}
 
 	public static void main(String[] args) {
-		ThreadCount1 threadCount = new ThreadCount1();
+		SynchronizedBlockCounter threadCount = new SynchronizedBlockCounter();
 
 		ExecutorService taskExecutor = Executors.newFixedThreadPool(3);
 		for (int i = 0; i < 10000; i++) {
