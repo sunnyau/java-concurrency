@@ -47,11 +47,12 @@ VSCode with WSL2 Reference : https://joe.blog.freemansoft.com/2020/10/java-8-dev
 
 # Reference
 
+> https://jenkov.com/tutorials/java-util-concurrent/index.html
+
 > https://www.baeldung.com/java-testing-multithreaded
 
 > https://www.baeldung.com/java-util-concurrent
 
->https://jenkov.com/tutorials/java-util-concurrent/index.html
+> https://www.baeldung.com/java-completablefuture
 
->https://www.baeldung.com/java-completablefuture
-
+> https://www.baeldung.com/java-completablefuture-runasync-supplyasync 
